@@ -1,4 +1,4 @@
-pragma solidity >=0.5.0 <0.8.0;
+pragma solidity >=0.6.0 <0.8.0;
 
 contract Test{
     uint private count;
@@ -44,5 +44,5 @@ contract Test{
     // earn(holderAdress,amount) send money to aave to earn interest
     // 
 
-    function() payable external{}
+    // fallback() payable external{}
 }

@@ -26,6 +26,10 @@
 require('babel-register');
 require('babel-polyfill');
 require('dotenv').config();
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const fs = require('fs');
+const mnemonic = "base task enjoy acoustic elder kitten style phrase garage wide year question";
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -36,11 +40,19 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
+   
   networks: {
     development: {
       host: "127.0.0.1",
       port: 7545,
       network_id: "*" // Match any network id
+    },
+    matic: {
+      provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.matic.today`),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
     },
     kovan: {
       provider: function() {
@@ -64,7 +76,7 @@ contracts_directory: './src/contracts/',
   // Configure your compilers
   compilers: {
     solc: {
-      // version: "0.5.1",    // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.6.2",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
